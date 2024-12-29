@@ -1,11 +1,11 @@
 import path from 'path';
 import dotenv from 'dotenv';
-import FileController from '../FileController/FileController.js';
+import FileService from '../fileService/fileService.js';
 
 dotenv.config();
 
 const filePath = path.join(process.cwd(), process.env.FILEPATH, process.env.FILENAME);
-const fileController = new FileController(filePath);
+const fileService = new FileService(filePath);
 
 export default class HomeController {
     static getHomepage(req, res) {
@@ -20,7 +20,7 @@ export default class HomeController {
 
     static getNumber(req, res) {
         try {
-            const number = fileController.getNumber();
+            const number = fileService.getNumber();
             res.json({ number });
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -34,11 +34,11 @@ export default class HomeController {
             const { amount } = req.params;
             const amountInt = parseInt(amount);
             if (status === "add") {
-                console.log(fileController.addNumber(amountInt));
-                fileController.lineMessage('增加', amount)
+                console.log(fileService.addNumber(amountInt));
+                fileService.lineMessage('增加', amount)
             } else if (status === "sub") {
-                console.log(fileController.subNumber(amountInt));
-                fileController.lineMessage('減少', amount)
+                console.log(fileService.subNumber(amountInt));
+                fileService.lineMessage('減少', amount)
             }
 
 

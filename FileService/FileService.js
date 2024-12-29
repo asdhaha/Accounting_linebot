@@ -4,7 +4,7 @@ import { Client } from '@line/bot-sdk';
 
 dotenv.config();
 
-export default class FileController {
+export default class FileService {
     constructor(filePath) {
         this.filePath = filePath;
         this.initFile();
